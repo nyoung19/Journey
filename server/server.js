@@ -10,7 +10,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const URI = `mongodb+srv://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PASSWORD}@cluster0.fd5epvb.mongodb.net/`
-
 mongoose.connect(URI)
 .then(() => {console.log('Connected to MongoDB')})
 .catch ((err) => {

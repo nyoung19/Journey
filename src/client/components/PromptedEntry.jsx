@@ -41,17 +41,21 @@ const PromptedEntry = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({entry: entry}), 
+                body: JSON.stringify({
+                    entry: entry,
+                    prompts: generatedPrompts,
+                    date: Date.now()
+                }), 
             })
 
-            // const submitted = await response.json();
-            // console.log(submitted);
-            // setGeneratedPrompts(prompts); 
+            const submitted = await response.json();
+            console.log(submitted);
+            setGeneratedPrompts(''); 
+            setEnteredEmotion('');
         }
         catch (error) { 
             console.error(error); 
         }
-
     }
 
     return (
@@ -60,12 +64,15 @@ const PromptedEntry = () => {
                 <input type="text" placeholder="i'm feeling..." id="emotion" onChange={emotionChangeHandler} value={enteredEmotion}></input>
                 <button>generate prompts</button>
             </form>
-            <p>{generatedPrompts}</p>
             {generatedPrompts ? 
-            <form onSubmit={entrySubmitHandler}>
-                <input type='text'></input> 
-                <button>submit entry</button>
-            </form>
+            <div>
+                <p>{`custom generated prompts for feeling ${enteredEmotion}:`}</p>
+                <p>{generatedPrompts}</p>
+                <form onSubmit={entrySubmitHandler}>
+                    <input type='text'></input> 
+                    <button>submit entry</button>
+                </form>
+            </div>
             : ''}
         </div>
     )    
