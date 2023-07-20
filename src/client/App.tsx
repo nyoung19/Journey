@@ -1,5 +1,5 @@
 import React from "react";
-import PromptedEntry from "./components/PromptedEntry.jsx";
+import PromptedEntry from "./components/PromptedEntry.js";
 
 const App = () => {
     return (

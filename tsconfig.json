@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "target": "es5", 
+        "jsx": "react", 
+        // "jsxFactory": "React.createElement", 
+        "module": "CommonJS",
+        // "rootDir": "./src",
+        "esModuleInterop": true,
+        // "forceConsistentCasingInFileNames": true, 
+        // "strict": true, 
+        // "noImplicitAny": true, 
+        "allowJs":true,
+        // "checkJs": true,
+        "skipLibCheck": true, 
+        "moduleResolution": "node",
+        "noEmit": true, 
+        "allowImportingTsExtensions": true,
+        
+
+    },
+    "include": ["src/**/*", "server/**/*", "public/**/*"],
+    "exclude": ["node_modules", "dist"]
+    // "include": ["./src/*", "./server/*", "./public/*"],
+}
