@@ -1,0 +1,35 @@
+const dotenv = require('dotenv');
+dotenv.config();
+const promptsController = {};
+
+promptsController.getPrompts = async (req, res, next) => {
+    try {
+        console.log('IN CONTROLLER', req.body.emotion)
+        const response = await fetch('https://api.openai.com/v1/completions', {
+            method: "POST", 
+            headers: {
+                "Content-Type": "application/json", 
+                "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`, 
+            },
+            body: JSON.stringify({
+                "model": "text-davinci-003",
+                "prompt": `Generate 3 self-reflection questions for someone who is feeling ${req.body.emotion}`,
+                "max_tokens": 75
+            })
+        }); 
+
+        const apiResponse = await response.json();
+        const prompts = apiResponse.choices[0].text; 
+        res.locals.prompts = prompts; 
+        // console.log('in controller', res.locals.prompts)
+        
+    } catch (error) {
+        next({
+            log: error,
+            message: 'Error in promptsController.getPrompts'
+        });
+    }
+    return next();
+}
+
+module.exports = promptsController;
